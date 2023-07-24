@@ -28,7 +28,15 @@
 	            </a>
 	            <div>
 	               <div>
-						<a href="#" class="btn btn-success btn-sm">로그인</a>
+						<c:if test="${login == null}">
+							<a href="${pageContext.request.contextPath}/ch08/content" class="btn btn-success btn-sm">로그인</a>
+						</c:if>
+	              
+	              		<c:if test="${login != null}">
+							현재 ${login.mid} 로그인 됨
+							<img src="${pageContext.request.contextPath}/resources/images/face/${login.mid}.png" width="30" height="30">
+							<a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-warning btn-sm mt-2">로그아웃</a>
+						</c:if>
 	               </div>
 	            </div>
 	         </nav>

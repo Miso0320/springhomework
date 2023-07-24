@@ -8,6 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 public class Ch01MemberDao {
 	public Ch01MemberDao() {
-		log.info("실행");
+		// log.info("실행");
 	}
 }
