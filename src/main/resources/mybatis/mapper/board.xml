@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="mybatis.mapper.member"></mapper> -->
-<mapper namespace="com.mycompany.springhomework.dao.mybatis.Ch13BoardDao">
+<mapper namespace="com.mycompany.springhomework.dao.Ch13BoardDao">
 
-  	<insert id="insert" parameterType="com.mycompany.springhomework.dto.Ch13Board">
-		insert into board(bno, btitle, bcontent, mid, bdate, bhitcount)
-		values(seq_bno.nextval, #{btitle}, #{bcontent}, #{mid}, sysdate, 0)
+	<insert id="insert" parameterType="Board">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			select seq_bno.nextval from dual
+		</selectKey>
+		<!-- null이 들어갈 컬럼값은 반드시 jdbcType을 명시해야함 -->
+		insert into board(bno, btitle, bcontent, mid, bdate, bhitcount,
+		battachoname, battachtype, battachsname, battachdata
+		) values(
+			#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0,
+			#{battachoname, jdbcType=VARCHAR},
+			#{battachtype, jdbcType=VARCHAR},
+			#{battachsname, jdbcType=VARCHAR},
+			#{battachdata, jdbcType=BLOB}
+		)
 	</insert>
 	
-	<select id="selectAll" resultType="com.mycompany.springhomework.dto.Ch13Board">
-		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
-		from board
+	<select id="selectByPage" parameterType="Pager" resultType="Board">
+		 <![CDATA[
+		select rnum, bno, btitle, mid, bdate, bhitcount, battachoname
+		from (
+			select rownum as rnum, bno, btitle, mid, bdate, bhitcount, battachoname
+			from (
+				select bno, btitle, mid, bdate, bhitcount, battachoname
+				from board
+				order by bno desc
+			)
+			where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
 	</select>
 	
-	<update id="updateByBno" parameterType="com.mycompany.springhomework.dto.Ch13Board">
+	<select id="count" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="selectByBno" parameterType="int" resultType="Board">
+		select bno, btitle, bcontent, mid, bdate, bhitcount, battachoname, battachsname, battachtype, battachdata
+		from board
+		where bno = #{bno}
+	</select>
+	
+	<update id="updateByBno" parameterType="Board">
 		update board set
 		btitle=#{btitle},
 		bcontent=#{bcontent}

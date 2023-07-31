@@ -2,19 +2,16 @@ package com.mycompany.springhomework.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.mycompany.springhomework.dto.Ch13Board;
 import com.mycompany.springhomework.dto.Ch13Pager;
 
-@Mapper
-public interface Ch13BoardDao {
-	public int insert(Ch13Board ch13Board);
+public interface Ch13BoardDaoOld {
+	public int insertBoard(Ch13Board board);
+	// 나중에 페이징으로 바꿔야 함
 	public List<Ch13Board> selectByPage(Ch13Pager pager);
 	public Ch13Board selectByBno(int bno);
-	public int updateByBno(Ch13Board ch13Board);
+	// 사용자가 form등을 통해 객체를 넘겨줌
+	public int updateByBno(Ch13Board board);
 	public int deleteByBno(int bno);
 	public int count();
 }
-
-

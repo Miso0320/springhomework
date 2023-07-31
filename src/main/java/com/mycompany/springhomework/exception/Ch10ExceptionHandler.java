@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @ControllerAdvice
 public class Ch10ExceptionHandler {
-	@ExceptionHandler(NullPointerException.class)
+	/*@ExceptionHandler(NullPointerException.class)
 	public String handleNullPointerException() {
 		log.info("실행");
 		return "ch10/500_null";
@@ -43,5 +43,5 @@ public class Ch10ExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public String handle404() {
 		return "ch10/404";
-	}
+	}*/
 }

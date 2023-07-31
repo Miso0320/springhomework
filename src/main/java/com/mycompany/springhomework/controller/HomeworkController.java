@@ -30,7 +30,7 @@ public class HomeworkController {
 		log.info("실행");
 	}
 	
-	// http://localhost:8080/springwebapp/ 요청을 하면 HomeController.index() 실행
+	// http://localhost:8080/springhomework/ 요청을 하면 HomeController.index() 실행
 	@RequestMapping("/")
 	public String index() {
 		log.info("실행");

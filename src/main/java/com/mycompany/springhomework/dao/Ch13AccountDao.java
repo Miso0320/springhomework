@@ -1,4 +1,4 @@
-package com.mycompany.springhomework.dao.mybatis;
+package com.mycompany.springhomework.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

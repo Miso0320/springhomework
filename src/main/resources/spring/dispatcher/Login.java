@@ -1,4 +1,4 @@
-package com.mycompany.springwebapp.interceptor;
+package com.mycompany.springhomework.interceptor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
